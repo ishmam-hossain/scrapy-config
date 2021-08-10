@@ -1,0 +1,12 @@
+source:
+  url: ["https://jsonplaceholder.typicode.com/todos/"]
+  type: api
+  accept: json
+
+mapping:
+  userId: value
+  id: date
+  title: time_zone
+  completed: frequency
+
+
