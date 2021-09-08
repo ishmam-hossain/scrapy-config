@@ -3,8 +3,8 @@ import pathlib
 
 import yaml
 from scrapy.crawler import CrawlerProcess
-from spiders.generic_spider import GenericSpider, APISpider
-
+from spiders.generic_spider import GenericSpider, APISpider, CSVSpider
+from pprint import pprint
 
 settings = {
     'LOG_LEVEL': 'INFO',
@@ -17,7 +17,8 @@ settings = {
 
 SOURCE_TYPE_TO_SPIDER_MAPPING = {
     'web': GenericSpider,
-    'api': APISpider
+    'api': APISpider,
+    'csv': CSVSpider
 }
 
 if __name__ == "__main__":
@@ -29,12 +30,9 @@ if __name__ == "__main__":
         path = os.path.join(current_path, file)
         with open(path, 'r') as f:
             parsed_data = yaml.load(f, Loader=yaml.FullLoader)
-            print(parsed_data)
 
             parser_spider_class = SOURCE_TYPE_TO_SPIDER_MAPPING.get(parsed_data.get('source').get('type'))
             process = CrawlerProcess(settings)
-            process.crawl(parser_spider_class, start_urls=parsed_data['source']['url'], extra="hello")
+            process.crawl(parser_spider_class, start_urls=parsed_data['source']['url'], data_source_info=parsed_data)
             process.start()
 
-            # multiple spider not working
-            break

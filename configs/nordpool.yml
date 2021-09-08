@@ -1,0 +1,16 @@
+source:
+  url: ["https://www.nordpoolgroup.com/api/marketdata/page/411340?currency=,EUR,,EUR"]
+  type: "api"
+
+target:
+  - iterables: data.Rows
+  - value:
+      - identifier: data.Rows.[list].Columns
+      - many: true
+  - date: data.Rows.Columns.startTime
+  - issue_date: ~
+  - keys:
+      - nordpool
+      - Day-ahead
+      - capacities
+      - PL

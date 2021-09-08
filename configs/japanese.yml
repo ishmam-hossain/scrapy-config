@@ -1,0 +1,22 @@
+source:
+  url: ["http://www.rikuden.co.jp/nw_jyukyudata/attach/area_jisseki_rikuden202106.csv"]
+  type: "csv"
+
+skip_rows: 6
+header_row_number: 6
+
+mapping:
+  date: 0
+  time: 1
+  value: 2
+  issue_date: ~
+
+keys:
+  - japan
+  - rikuden
+  - jisseki
+  - h
+
+frequency: 'H'
+time_zone: 'CET'
+
